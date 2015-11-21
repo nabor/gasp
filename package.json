@@ -1,0 +1,24 @@
+{
+  "name": "gasp",
+  "version": "0.0.0",
+  "description": "Simple blog patform",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nabor/gasp.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Nabor Erices",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nabor/gasp/issues"
+  },
+  "homepage": "https://github.com/nabor/gasp#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
