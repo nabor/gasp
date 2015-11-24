@@ -37,7 +37,7 @@ gulp.task('libraries', function(cb) {
 });
 
 gulp.task('supervisor', function() {
-	supervisor('bin/www', {
+	supervisor('example/default', {
 		ignore: ['src']
 	});
 });

@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+var Gasp = require('../gasp');
+
+var app = new Gasp();
+app.run();

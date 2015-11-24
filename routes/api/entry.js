@@ -1,4 +1,4 @@
-var Entry = {}
+function Entry() {}
 
 Entry.list = function(req, res, next) {
 	res.json({ 'entries': [
@@ -10,9 +10,17 @@ Entry.list = function(req, res, next) {
 };
 
 Entry.create = function(req, res, next) {
-	res.json({
-		'created': false
-	});
+	if (req.body.hasOwnProperty('title') && req.body.hasOwnProperty('content')) {
+		res.json({
+			'title': req.body.title,
+			'content': req.body.content
+		});
+	} else {
+		res.json({
+			'error': 'Unexpected post data'
+		});
+	}
+	
 };
 
 module.exports = Entry;
