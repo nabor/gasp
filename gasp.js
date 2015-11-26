@@ -1,5 +1,7 @@
+var fs = require('fs');
 var express = require('express');
 var path = require('path');
+var callsite = require('callsite');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -26,8 +28,11 @@ function normalizePort(val) {
 	return false;
 }
 
-function Gasp() {
+function Gasp(config) {
+	this.config = config || {}
 	this.app = express();
+	this.app.locals.config = config;
+
 	this.app.set('views', path.join(__dirname, 'views'));
 	this.app.set('view engine', 'jade');
 	// uncomment after placing your favicon in /static
@@ -36,10 +41,11 @@ function Gasp() {
 	this.app.use(bodyParser.json());
 	this.app.use(bodyParser.urlencoded({ extended: false }));
 	this.app.use(cookieParser());
-	this.app.use(express.static(path.join(__dirname, 'static')));
+	this.app.use('/static', express.static(path.join(__dirname, 'static')));
+	this.app.use(express.static(this.app.locals.config.output));
 
 	// Routes
-	this.app.use('/', routes);
+	this.app.use('/gasp', routes);
 	this.app.use('/api', api);
 
 	this.port = normalizePort(process.env.PORT || '3000');
@@ -56,6 +62,15 @@ function Gasp() {
 	// production error handler
 	// no stacktraces leaked to user
 	this.app.use(error.handler);
+	this.init();
+}
+
+Gasp.prototype.init = function() {
+	//template_file = path.join(req.app.locals.config.templates, 'index.jade');
+	//html = jade.renderFile(template_file, { title: 'Gasp!' });
+	html = '<html><head><title>Welcome to Gasp!</title></head></html>';
+	out_file = path.join(this.app.locals.config.output, 'index.html');
+	fs.writeFileSync(out_file, html);
 }
 
 Gasp.prototype.run = function() {
