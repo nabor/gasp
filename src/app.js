@@ -1,4 +1,8 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Editor} from './editor';
+
 ReactDOM.render(
-	<h1>Gasp!</h1>,
+	<Editor />,
 	document.getElementById('app')
 );

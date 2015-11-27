@@ -69,8 +69,8 @@ Gasp.prototype.init = function() {
 	//template_file = path.join(req.app.locals.config.templates, 'index.jade');
 	//html = jade.renderFile(template_file, { title: 'Gasp!' });
 	html = '<html><head><title>Welcome to Gasp!</title></head></html>';
-	out_file = path.join(this.app.locals.config.output, 'index.html');
-	fs.writeFileSync(out_file, html);
+	outFile = path.join(this.app.locals.config.output, 'index.html');
+	fs.writeFileSync(outFile, html);
 }
 
 Gasp.prototype.run = function() {

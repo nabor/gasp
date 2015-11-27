@@ -14,16 +14,25 @@ Entry.list = function(req, res, next) {
 };
 
 Entry.create = function(req, res, next) {
-	if (req.body.hasOwnProperty('title') && req.body.hasOwnProperty('content')) {
-		template_file = path.join(req.app.locals.config.templates, 'post.jade');
-		console.log(template_file);
-		html = jade.renderFile(template_file, {
+	canPost = req.body.hasOwnProperty('id');
+	canPost = canPost && req.body.hasOwnProperty('title');
+	canPost = canPost && req.body.hasOwnProperty('content');
+	if (canPost) {
+		templateFile = path.join(
+			req.app.locals.config.templates, 'post.jade'
+		);
+		console.log(templateFile);
+		html = jade.renderFile(templateFile, {
 			title: req.body.title,
 			content: req.body.content
 		});
-		out_file = path.join(req.app.locals.config.output, 'last.html');
-		fs.writeFileSync(out_file, html);
+		outFile = path.join(
+			req.app.locals.config.output,
+			req.body.id + '.html'
+		);
+		fs.writeFileSync(outFile, html);
 		res.json({
+			'id': req.body.id,
 			'title': req.body.title,
 			'content': req.body.content,
 			'render': html

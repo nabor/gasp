@@ -4,11 +4,13 @@ var util = require('gulp-util');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var connect = require('gulp-connect');
+var minifyCss = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
 var supervisor = require('gulp-supervisor');
 
 var babelify= require('babelify');
 var browserify = require('browserify');
+
 
 var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
@@ -26,14 +28,12 @@ gulp.task('build', function() {
 		.pipe(gulp.dest('./static/js'));
 });
 
-gulp.task('libraries', function(cb) {
-	return gulp.src([
-		'./node_modules/react/dist/react.js',
-		'./node_modules/react-dom/dist/react-dom.js'
-	])
-	.pipe(concat('lib.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest('static/js'));
+gulp.task('minify-css', function() {
+	return gulp.src('./node_modules/normalize.css/normalize.css')
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(minifyCss())
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest('./static/css'));
 });
 
 gulp.task('supervisor', function() {
@@ -51,5 +51,4 @@ gulp.task('open', function(){
 		.pipe(open({uri: 'http://localhost:3000'}));
 });
 
-gulp.task('install', ['libraries']);
-gulp.task('default', ['build', 'watch', 'supervisor', 'open']);
+gulp.task('default', ['build', 'minify-css', 'watch', 'supervisor', 'open']);
