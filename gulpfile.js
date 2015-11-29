@@ -29,7 +29,11 @@ gulp.task('build', function() {
 });
 
 gulp.task('minify-css', function() {
-	return gulp.src('./node_modules/normalize.css/normalize.css')
+	return gulp.src([
+			'./node_modules/normalize.css/normalize.css',
+			'./src/style.css'
+		])
+		.pipe(concat('style.min.css'))
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(minifyCss())
 		.pipe(sourcemaps.write('./'))
@@ -42,8 +46,12 @@ gulp.task('supervisor', function() {
 	});
 });
 
-gulp.task('watch', function() {
+gulp.task('watch-js', function() {
 	gulp.watch('src/**/*.js', ['build']);
+});
+
+gulp.task('watch-css', function() {
+	gulp.watch('src/**/*.css', ['minify-css']);
 });
 
 gulp.task('open', function(){
@@ -51,4 +59,5 @@ gulp.task('open', function(){
 		.pipe(open({uri: 'http://localhost:3000'}));
 });
 
+gulp.task('watch', ['watch-js', 'watch-css']);
 gulp.task('default', ['build', 'minify-css', 'watch', 'supervisor', 'open']);

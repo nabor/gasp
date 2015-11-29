@@ -1,0 +1,73 @@
+#editor {
+	margin-top: 20px;
+}
+
+#toolbar {
+	padding: 10px 20px;
+}
+
+*[contenteditable=true]:hover,
+*[contenteditable=true]:focus {
+	border: none;
+	outline: none;
+}
+
+article, .article {
+	font-family: serif;
+	color: #333;
+}
+
+@media (min-width: 769px) {
+	article, .article {
+		font-size: 21px;
+	}
+	.container {
+		margin: 20px auto;
+		max-width: 760px;
+		padding: 0 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	article, .article {
+		font-size: 18px;
+	}
+	.container {
+		margin: 20px;
+	}
+}
+
+/* Helper classes */
+.pull-left {
+	float: left;
+}
+
+.pull-right {
+	float: right;
+}
+
+button {
+	display: inline-block;
+	height: 38px;
+	padding: 0 30px;
+	color: #555;
+	text-align: center;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 38px;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+	text-decoration: none;
+	white-space: nowrap;
+	background-color: transparent;
+	border-radius: 19px;
+	border: 1px solid #bbb;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+button:hover, button:focus {
+	color: #333;
+	border-color: #888;
+	outline: 0;
+}
