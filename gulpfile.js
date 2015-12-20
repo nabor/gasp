@@ -10,6 +10,7 @@ var supervisor = require('gulp-supervisor');
 
 var babelify= require('babelify');
 var browserify = require('browserify');
+var vueify = require('vueify');
 
 
 var buffer = require('vinyl-buffer');
@@ -17,7 +18,7 @@ var source = require('vinyl-source-stream');
 
 gulp.task('build', function() {
 	browserify('./src/app.js', { debug: true })
-		.transform(babelify, {presets: ['es2015', 'stage-0', 'react']})
+		.transform(vueify)
 		.bundle()
 		.on('error', util.log.bind(util, 'Browserify Error'))
 		.pipe(source('app.js'))
@@ -50,14 +51,18 @@ gulp.task('watch-js', function() {
 	gulp.watch('src/**/*.js', ['build']);
 });
 
+gulp.task('watch-vue', function() {
+	gulp.watch(['src/**/*.vue', 'src/**/*.styl'], ['build']);
+});
+
 gulp.task('watch-css', function() {
 	gulp.watch('src/**/*.css', ['minify-css']);
 });
 
 gulp.task('open', function(){
 	gulp.src(__filename)
-		.pipe(open({uri: 'http://localhost:3000'}));
+		.pipe(open({uri: 'http://localhost:3000/gasp'}));
 });
 
-gulp.task('watch', ['watch-js', 'watch-css']);
+gulp.task('watch', ['watch-js', 'watch-vue', 'watch-css']);
 gulp.task('default', ['build', 'minify-css', 'watch', 'supervisor', 'open']);
