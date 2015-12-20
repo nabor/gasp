@@ -2,14 +2,16 @@
 
 <template lang="jade">
 #toolbar
-	button.right {{msg}}
+	button#publish.green.right {{publish}}
+	button#save.right {{save}}
 </template>
 
 <script>
 export default {
 	data() {
 		return {
-			msg: 'Save'
+			save: 'Save',
+			publish: 'Publish'
 		}
 	}
 }

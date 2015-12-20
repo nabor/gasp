@@ -6,6 +6,7 @@
 
 	button
 		height: 38px
+		margin: 0 5px
 		padding: 0 30px
 		color: #555
 		text-align: center
@@ -21,12 +22,21 @@
 		border: 1px solid #bbb
 		cursor: pointer
 		box-sizing: border-box
-		
+
 		&:hover
 		&:focus
 			color: #333
 			border-color: #888
 			outline: 0
+
+		&.green
+			color: lightgreen
+			border: 1px solid lightgreen
+
+			&:hover
+			&:focus
+				color: green
+				border-color: green
 
 		&.left
 			float: left
