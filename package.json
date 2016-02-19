@@ -44,6 +44,7 @@
     "vinyl-source-stream": "^1.1.0",
     "vue": "^1.0.12",
     "vue-hot-reload-api": "^1.2.2",
+    "vueify": "^8.3.5",
     "vueify-insert-css": "^1.0.0"
   }
 }
